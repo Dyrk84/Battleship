@@ -1,10 +1,7 @@
 package hu.battleship.tools;
 
-import hu.battleship.utils.MapMarks;
 import lombok.Getter;
-import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Map {

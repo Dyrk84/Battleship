@@ -30,6 +30,17 @@ public class GameCode {
             mapList.add(map);
         }
 
+        //hajó lerakási mechanizmusa innen kezdődik.
+        //úgy lenne jó, hogy bejönne egy hajó fajta (legnagyobb), és azt kellene lerakni.
+        //hogyan oldjam meg, hogy legyen egy listám, amiben benne vannak a hajók lehetőleg méret szerint sorba rakva, és a hajókhoz kell egy szám, ami azt mutatja, hogy az adott hajóból mennyit kell még letenni.
+        //-kell egy olyan map, aminek key-jeit én választhatom meg, hogy hogy következzenek sorrendben. Vagy csinálok két listát, és összekötöm őket indexük szerint.
+        // Egyelőre legyen a lerakás módja az, hogy meg kell adni egy koordinátát, és az lesz a bal(felső) kockája a hajónak.
+        //Meg kell nézni a térképen, hogy arra a koordinátára az adott hajót be lehet-e tenni. Hogy?
+        //a kapott koordinátát meg kell vizsgálni, hogy oda tehető-e a hajó.
+        // Aztán ugyanezeket meg kell nézni a hajó többi kockájával is.
+        // Aztán meg kell nézni, hogy van-e másik hajó a hajó közvetlen szomszédságában (sarkok nem számítanak)
+        // ha ezek a feltételek megfelelnek, le kell rakni a hajót. hogyan?
+        // a hajó most már valid koordinátáit át kell adni a mapnak, ahol UNDISCOVERED_SHIP-re kell átállítani a BLACK_CLOUDS-okat.
         for (int j = 0; j < numberOfPlayers; j++){
             TextSeparator.format(j+1 + ". játékos rakja le a hajóit!");
             mapList.get(j).mapPrinter();

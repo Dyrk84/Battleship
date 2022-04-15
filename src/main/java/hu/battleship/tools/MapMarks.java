@@ -1,4 +1,4 @@
-package hu.battleship.utils;
+package hu.battleship.tools;
 
 import hu.battleship.utils.Colors;
 
