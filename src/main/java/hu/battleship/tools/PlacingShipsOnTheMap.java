@@ -5,7 +5,7 @@ public class PlacingShipsOnTheMap {
     1. Hogy kérem be a hajókat? -kell scanner, kérek betüt (abc lista alapján adhatja csak meg az inputot, és a lista indexe alapján fogok hivatkozni) és kérek számot. Ezekkel meg tudom adni, hogy hova rakja a hajót, a hajó bal felső sarka lesz a koordinátán.
     2. Mekkora hajók legyenek? -pályamérethez igazodó hajómennyiségre lenne szükség.
     3x3: 2-1 1-2 (44%)
-    4x4 3-1 2-2 1-3 (50%)
+    4x4 3-1 2-1 1-3 (50%)
     5x5 3-1 2-2 1-3 1-4 (56%)
     6x6 4-1 3-2 2-3 1-4 (55%)
     7x7 5-1 4-2 3-3 2-4 (61%)

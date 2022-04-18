@@ -74,29 +74,29 @@ public class Menus {
         TextSeparator.format("");
     }
 
-    public static int rowInputRequestor(int numberOfSize) { //bekér egy betüt, megnézi, megnézi van-e a térképhez ilyen koordináta
+    public static int rowInputRequester(int numberOfSize) { //bekér egy betüt, megnézi, megnézi van-e a térképhez ilyen koordináta
         List<String> abcList = InputAndListHandlers.createABCList(); //visszaad egy betü listát A-Z-ig
         List<String> validLettersList = InputAndListHandlers.validLettersListCreator(numberOfSize, abcList); //abc listát csinál, annyi betüvel, amekkora kell a választott pályamérethez
-        printRowInputRequestor();
+        printRowInputRequester();
         String rowCoordinateInString = InputAndListHandlers.askForLetter(validLettersList); //Ez kéri be a koordináta betüjét
-        int rowCoordenateInInt =  validLettersList.indexOf(rowCoordinateInString) +1 ; //beépített String metódus, visszaadja a zárójelben lévő Stringnek a helyét a listában és hozzáadok 1-et, mert a térképen a 0 sorban a betük vannak.
-        return rowCoordenateInInt;
+        int rowCoordinateInInt =  validLettersList.indexOf(rowCoordinateInString); //beépített String metódus, visszaadja a zárójelben lévő Stringnek a helyét a listában.
+        return rowCoordinateInInt + 1; // hozzáadok 1-et, mert a térképen a 0 sorban a betük vannak
     }
 
-    private static void printRowInputRequestor() {
+    private static void printRowInputRequester() {
         TextSeparator.format("");
         TextSeparator.formatSides("Add meg, hogy melyik betüjelű sort szeretnéd kiválasztani:");
         TextSeparator.format("");
     }
 
-    public static int columnInputRequestor(int numberOfSize) {
+    public static int columnInputRequester(int numberOfSize) {
         List<Integer> validNumbers = InputAndListHandlers.numListCreator(numberOfSize); //visszaad egy listát 1-től numberOfSize-ig
-        printColumnInputRequestor();
+        printColumnInputRequester();
         int columnCoordinate = InputAndListHandlers.askForInt(validNumbers);
         return columnCoordinate;
     }
 
-    private static void printColumnInputRequestor() {
+    private static void printColumnInputRequester() {
         TextSeparator.format("");
         TextSeparator.formatSides("Add meg, hogy melyik számjegyű oszlopot szeretnéd kiválasztani:");
         TextSeparator.format("");
