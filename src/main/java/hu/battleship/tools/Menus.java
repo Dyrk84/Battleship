@@ -80,7 +80,7 @@ public class Menus {
         printRowInputRequester();
         String rowCoordinateInString = InputAndListHandlers.askForLetter(validLettersList); //Ez kéri be a koordináta betüjét
         int rowCoordinateInInt =  validLettersList.indexOf(rowCoordinateInString); //beépített String metódus, visszaadja a zárójelben lévő Stringnek a helyét a listában.
-        return rowCoordinateInInt + 1; // hozzáadok 1-et, mert a térképen a 0 sorban a betük vannak
+        return rowCoordinateInInt + 2; // hozzáadok 1-et, mert a térképen a 0 sorban a betük vannak
     }
 
     private static void printRowInputRequester() {
@@ -93,7 +93,7 @@ public class Menus {
         List<Integer> validNumbers = InputAndListHandlers.numListCreator(numberOfSize); //visszaad egy listát 1-től numberOfSize-ig
         printColumnInputRequester();
         int columnCoordinate = InputAndListHandlers.askForInt(validNumbers);
-        return columnCoordinate;
+        return columnCoordinate + 1;
     }
 
     private static void printColumnInputRequester() {

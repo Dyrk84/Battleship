@@ -1,5 +1,6 @@
 package hu.battleship.tools;
 
+import hu.battleship.utils.Colors;
 import lombok.Getter;
 
 import java.util.List;
@@ -19,12 +20,18 @@ public class GameMap {
             for (int column = 0; column < oceanMap[row].length; column++) { //végigmegyek az oszlopokon
                 if (row == 0 && column == 0) {
                     oceanMap[row][column] = "  "; //ezzel oldom meg, hogy [0][0]-nál ne legyen semmi
-                } else if (column == 0) {
-                    oceanMap[row][column] = abc.get(row - 1) + " "; //az előző ifnél a row 0. helye üres így itt már a row értéke 1, ami az abc listában már a B lenne, ezért kell egyet kivonni, hogy A-val kezdje
-                } else if (row == 0 && column < 10) {
-                    oceanMap[row][column] = " " + column + " "; // ezzel iratom a három mező közepére az egyszámjegyű számokat
-                } else if (row == 0 && column >= 10) {
-                    oceanMap[row][column] = " " + Integer.toString(column); //ezzel iratom a három mező közepére a kétszámjegyű számok első számjegyét
+                } else if (column == 0 && row > 1 && row < oceanMap.length -1) {
+                    oceanMap[row][column] = " " + abc.get(row - 2) + " "; //az előző ifnél a row 0. helye üres így itt már a row értéke 1, ami az abc listában már a B lenne, ezért kell egyet kivonni, hogy A-val kezdje
+                } else if (row == 0 && column > 1 && column < oceanMap.length -1) {
+                    if (column < 11) {
+                        oceanMap[row][column] = " " + (column - 1) + " ";
+                    }else {
+                        oceanMap[row][column] = " " + (column - 1);
+                    }
+                } else if (column == 1 || column == oceanMap.length-1) {
+                    oceanMap[row][column] = Colors.ANSI_BLUE + "~" + Colors.ANSI_RESET;
+                } else if (row == 1 || row == oceanMap.length-1) {
+                    oceanMap[row][column] = Colors.ANSI_BLUE + "~~~" + Colors.ANSI_RESET;
                 } else if (oceanMap[row][column] == null) {
                     oceanMap[row][column] = MapMarks.BLUE_WATER.markType; //értéket adok az adott sor és oszlop által jelzett String változónak
                 }
