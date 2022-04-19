@@ -29,9 +29,9 @@ public class GameMap {
                         oceanMap[row][column] = " " + (column - 1);
                     }
                 } else if (column == 1 || column == oceanMap.length-1) {
-                    oceanMap[row][column] = Colors.ANSI_BLUE + "~" + Colors.ANSI_RESET;
+                    oceanMap[row][column] = MapMarks.MAPFRAME_COLUMN.markType;
                 } else if (row == 1 || row == oceanMap.length-1) {
-                    oceanMap[row][column] = Colors.ANSI_BLUE + "~~~" + Colors.ANSI_RESET;
+                    oceanMap[row][column] = MapMarks.MAPFRAME_ROW.markType;
                 } else if (oceanMap[row][column] == null) {
                     oceanMap[row][column] = MapMarks.BLUE_WATER.markType; //értéket adok az adott sor és oszlop által jelzett String változónak
                 }

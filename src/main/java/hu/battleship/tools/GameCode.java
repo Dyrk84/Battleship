@@ -81,6 +81,15 @@ public class GameCode {
                     fromSwitchSetShipsToBeDeployed(2, 1, 0, 0, 0); //beállítja, hogy melyik típusú hajóból mennyit fogunk tudni letenni
                     printGetShipsTypeAndHowMany(); //kiiratja hogy mennyi és milyen típusú hajókat kell letenni
                     shipsToBeDeployed(numberOfSize, i); //ebben lehet letenni a hajókat
+                    for (int row = 0; row < arrayMapsForPlayersList.get(i).length; row++) {
+                        for (int column = 0; column < arrayMapsForPlayersList.get(i)[row].length; column++) {
+                            if (arrayMapsForPlayersList.get(i)[row][column].equals(MapMarks.BLUE_WATER.markType)) {
+                                {
+                                    arrayMapsForPlayersList.get(i)[row][column] = MapMarks.BLACK_CLOUDS.markType;
+                                }
+                            }
+                        }
+                    } //TODO ezt kiszedni. Vagy olyan térkép fog kelleni, ami az enumokat tárolja, vagy két map fog kelleni, és egyikről fogok utalni a másikra
                     break;
                 case 4:
                     fromSwitchSetShipsToBeDeployed(3, 2, 0, 0, 0);
@@ -88,32 +97,32 @@ public class GameCode {
                     shipsToBeDeployed(numberOfSize, i);
                     break;
                 case 5:
-                    fromSwitchSetShipsToBeDeployed(3, 2, 1, 0, 0);
+                    fromSwitchSetShipsToBeDeployed(4, 2, 1, 0, 0);
                     printGetShipsTypeAndHowMany();
                     shipsToBeDeployed(numberOfSize, i);
                     break;
                 case 6:
-                    fromSwitchSetShipsToBeDeployed(5, 4, 2, 1, 0);
+                    fromSwitchSetShipsToBeDeployed(5, 3, 1, 0, 0);
                     printGetShipsTypeAndHowMany();
                     shipsToBeDeployed(numberOfSize, i);
                     break;
                 case 7:
-                    fromSwitchSetShipsToBeDeployed(5, 4, 3, 2, 0);
+                    fromSwitchSetShipsToBeDeployed(6, 4, 1, 1, 0);
                     printGetShipsTypeAndHowMany();
                     shipsToBeDeployed(numberOfSize, i);
                     break;
                 case 8:
-                    fromSwitchSetShipsToBeDeployed(5, 4, 3, 2, 1);
+                    fromSwitchSetShipsToBeDeployed(7, 5, 1, 1, 1);
                     printGetShipsTypeAndHowMany();
                     shipsToBeDeployed(numberOfSize, i);
                     break;
                 case 9:
-                    fromSwitchSetShipsToBeDeployed(6, 5, 4, 3, 2);
+                    fromSwitchSetShipsToBeDeployed(8, 6, 2, 1, 1);
                     printGetShipsTypeAndHowMany();
                     shipsToBeDeployed(numberOfSize, i);
                     break;
                 case 10:
-                    fromSwitchSetShipsToBeDeployed(7, 6, 5, 4, 3);
+                    fromSwitchSetShipsToBeDeployed(9, 7, 2, 2, 1);
                     printGetShipsTypeAndHowMany();
                     shipsToBeDeployed(numberOfSize, i);
                     break;
@@ -134,73 +143,97 @@ public class GameCode {
                         (arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1] + 1].equals(MapMarks.BLUE_WATER.markType)) &&
                         (arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 2].equals(MapMarks.BLUE_WATER.markType)) &&
                         (arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1] + 2].equals(MapMarks.BLUE_WATER.markType))) {
-                    System.out.println("bla");
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 2] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1] + 2] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    aircraftCarrier.setShipsToBeDeployed(aircraftCarrier.getShipsToBeDeployed() - 1);
+                } else {
+                    System.out.println(Colors.ANSI_RED + "Nem lehet ide tenni a hajót! " + Colors.ANSI_RESET);
                 }
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 2] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1] + 2] = MapMarks.UNDISCOVERED_SHIP.markType;
-                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
-                aircraftCarrier.setShipsToBeDeployed(aircraftCarrier.getShipsToBeDeployed() - 1);
                 if (aircraftCarrier.getShipsToBeDeployed() > 0) {
                     System.out.println("Még mindig ki kell rakni " + aircraftCarrier.getShipsToBeDeployed() + "db " + ShipTypes.AIRCRAFT_CARRIER.shipType + "t!");
                 }
+                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
             }
         }
         if (battleship.getShipsToBeDeployed() > 0) {
             while (0 < battleship.getShipsToBeDeployed()) {
                 System.out.println("Válaszd ki a " + ShipTypes.BATTLESHIP.shipType + " bal felső sarkának koordinátáját: ");
                 int[] coordinates = inputForCoordinates(numberOfSize);
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
-                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
-                battleship.setShipsToBeDeployed(battleship.getShipsToBeDeployed() - 1);
+                if ((arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]].equals(MapMarks.BLUE_WATER.markType)) &&
+                        (arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1]].equals(MapMarks.BLUE_WATER.markType)) &&
+                        (arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1].equals(MapMarks.BLUE_WATER.markType)) &&
+                        (arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1] + 1].equals(MapMarks.BLUE_WATER.markType))) {
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0] + 1][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    battleship.setShipsToBeDeployed(battleship.getShipsToBeDeployed() - 1);
+                } else {
+                    System.out.println(Colors.ANSI_RED + "Nem lehet ide tenni a hajót! " + Colors.ANSI_RESET);
+                }
                 if (battleship.getShipsToBeDeployed() > 0) {
                     System.out.println("Még mindig ki kell rakni " + battleship.getShipsToBeDeployed() + "db " + ShipTypes.BATTLESHIP.shipType + "t!");
                 }
+                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
             }
         }
         if (destroyer.getShipsToBeDeployed() > 0) {
             while (0 < destroyer.getShipsToBeDeployed()) {
                 System.out.println("Válaszd ki a " + ShipTypes.DESTROYER.shipType + " bal sarkának koordinátáját: ");
                 int[] coordinates = inputForCoordinates(numberOfSize);
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 2] = MapMarks.UNDISCOVERED_SHIP.markType;
-                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
-                destroyer.setShipsToBeDeployed(destroyer.getShipsToBeDeployed() - 1);
+                if ((arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]].equals(MapMarks.BLUE_WATER.markType)) &&
+                        (arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1].equals(MapMarks.BLUE_WATER.markType)) &&
+                        (arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 2].equals(MapMarks.BLUE_WATER.markType))) {
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 2] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    destroyer.setShipsToBeDeployed(destroyer.getShipsToBeDeployed() - 1);
+                } else {
+                    System.out.println(Colors.ANSI_RED + "Nem lehet ide tenni a hajót! " + Colors.ANSI_RESET);
+                }
                 if (destroyer.getShipsToBeDeployed() > 0) {
                     System.out.println("Még mindig ki kell rakni " + destroyer.getShipsToBeDeployed() + "db " + ShipTypes.DESTROYER.shipType + "t!");
                 }
+                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
             }
         }
         if (frigate.getShipsToBeDeployed() > 0) {
             while (0 < frigate.getShipsToBeDeployed()) {
                 System.out.println("Válaszd ki a " + ShipTypes.FRIGATE.shipType + " bal sarkának koordinátáját: ");
                 int[] coordinates = inputForCoordinates(numberOfSize);
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
-                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
-                frigate.setShipsToBeDeployed(frigate.getShipsToBeDeployed() - 1);
-                if (frigate.getShipsToBeDeployed() > 0) {
-                    System.out.println("Még mindig ki kell rakni " + frigate.getShipsToBeDeployed() + "db " + ShipTypes.FRIGATE.shipType + "ot!");
+                if ((arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]].equals(MapMarks.BLUE_WATER.markType)) &&
+                        (arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1].equals(MapMarks.BLUE_WATER.markType))) {
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1] + 1] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    frigate.setShipsToBeDeployed(frigate.getShipsToBeDeployed() - 1);
+                } else {
+                    System.out.println(Colors.ANSI_RED + "Nem lehet ide tenni a hajót! " + Colors.ANSI_RESET);
                 }
+                if (frigate.getShipsToBeDeployed() > 0) {
+                    System.out.println("Még mindig ki kell rakni " + frigate.getShipsToBeDeployed() + "db " + ShipTypes.FRIGATE.shipType + "t!");
+                }
+                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
             }
         }
+
         if (fishingBoat.getShipsToBeDeployed() > 0) {
             while (0 < fishingBoat.getShipsToBeDeployed()) {
                 System.out.println("Válaszd ki a " + ShipTypes.FISHING_BOAT.shipType + " bal sarkának koordinátáját: ");
                 int[] coordinates = inputForCoordinates(numberOfSize);
-                arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
-                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
-                fishingBoat.setShipsToBeDeployed(fishingBoat.getShipsToBeDeployed() - 1);
+                if (arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]].equals(MapMarks.BLUE_WATER.markType)) {
+                    arrayMapsForPlayersList.get(i)[coordinates[0]][coordinates[1]] = MapMarks.UNDISCOVERED_SHIP.markType;
+                    fishingBoat.setShipsToBeDeployed(fishingBoat.getShipsToBeDeployed() - 1);
+                } else {
+                    System.out.println(Colors.ANSI_RED + "Nem lehet ide tenni a hajót! " + Colors.ANSI_RESET);
+                }
                 if (fishingBoat.getShipsToBeDeployed() > 0) {
                     System.out.println("Még mindig ki kell rakni " + fishingBoat.getShipsToBeDeployed() + "db " + ShipTypes.FISHING_BOAT.shipType + "t!");
                 }
+                GameMap.mapPrinter(arrayMapsForPlayersList.get(i));
             }
         }
     }

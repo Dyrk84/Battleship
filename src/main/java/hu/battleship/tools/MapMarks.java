@@ -3,6 +3,8 @@ package hu.battleship.tools;
 import hu.battleship.utils.Colors;
 
 public enum MapMarks {
+    MAPFRAME_ROW(Colors.ANSI_BLUE + "~~~" + Colors.ANSI_RESET),
+    MAPFRAME_COLUMN(Colors.ANSI_BLUE + "~" + Colors.ANSI_RESET),
     BLACK_CLOUDS(Colors.ANSI_BLACK_BACKGROUND + "[ ]" + Colors.ANSI_RESET),
     UNDISCOVERED_SHIP(Colors.ANSI_BLACK_BACKGROUND + "[ ]" + Colors.ANSI_RESET),
     BLUE_WATER(Colors.ANSI_CYAN_BACKGROUND + "[" + Colors.ANSI_BLUE + "~" + Colors.ANSI_RESET + Colors.ANSI_CYAN_BACKGROUND + "]" + Colors.ANSI_RESET),
